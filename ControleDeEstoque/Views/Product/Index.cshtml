@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ControleDeEstoque.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div>
+    <h3>Importar Produtos</h3>
+    <form asp-controller="Product" asp-action="ImportProducts" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <input type="submit" value="Importar" class="btn btn-primary" />
+    </form>
+
+</div>
+<div>
+    <form asp-action="SearchByBarcode">
+        <h3>Digite o Código de Barras</h3>
+        <input name="barcode" class="form-control" />
+        <div class="form-group">
+            <input type="submit" value="Pesquisar" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValordeCompra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValordeVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigodebarra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fornecedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValordeCompra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValordeVenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigodebarra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fornecedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-action="ExportToExcel">Exportar para Excel</a>
+</div>
+
